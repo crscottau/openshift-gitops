@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/application-set-refresh: "true"
+  creationTimestamp: "2026-09-15T06:19:42Z"
+  generation: 8
+  name: httpd
+  namespace: openshift-gitops
+  resourceVersion: "404100"
+  uid: f91597ce-4152-4c6e-808b-d2ed36074d95
+spec:
+  destination:
+    namespace: httpd-test
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: apps/httpd-deployment/base
+    repoURL: https://github.com/crscottau/openshift-stuff.git
+    targetRevision: HEAD
+  sources: []
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
